@@ -6,8 +6,8 @@ object TestSpring {
     @JvmStatic
     fun main(args: Array<String>) {
         val context = ClassPathXmlApplicationContext("applicationContext.xml")
-        val testBean: TestBean = context.getBean("testBean", TestBean::class.java)
-        println(testBean.name)
+        val musicBean: Music = context.getBean("musicBean", Music::class.java)
+        MusicPlayer(musicBean).playMusic()
         context.close()
     }
 }
