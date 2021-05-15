@@ -10,11 +10,14 @@
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
 
     <bean id="classicalMusicBean"
-          class="com.hex.springcourse.ClassicalMusic"/>
+          class="com.hex.springcourse.ClassicalMusic"
+          factory-method="getClassicalMusic"/>
     <bean id="rockMusicBean"
-          class="com.hex.springcourse.RockMusic"/>
+          class="com.hex.springcourse.RockMusic"
+          factory-method="getRockMusic"/>
     <bean id="metalMusicBean"
-          class="com.hex.springcourse.MetalMusic"/>
+          class="com.hex.springcourse.MetalMusic"
+          factory-method="getMetalMusic"/>
 
     <bean id="musicPlayerBean"
           class="com.hex.springcourse.MusicPlayer"
