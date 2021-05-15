@@ -1,5 +1,6 @@
 package com.hex.springcourse
 
+import com.hex.springcourse.beans.Computer
 import org.springframework.context.support.ClassPathXmlApplicationContext
 
 object TestSpring {
