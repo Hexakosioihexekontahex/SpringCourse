@@ -1,10 +1,13 @@
 package com.hex.springcourse.beans.music
 
 import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.beans.factory.config.ConfigurableBeanFactory
+import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
 
 @Component
 @Qualifier(MetalMusic.TAG)
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 class MetalMusic private constructor() : Music {
 
     override fun getSongs() = listOf(

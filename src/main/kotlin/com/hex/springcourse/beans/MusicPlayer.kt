@@ -3,11 +3,16 @@ package com.hex.springcourse.beans
 import com.hex.springcourse.beans.music.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.beans.factory.config.ConfigurableBeanFactory
+import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
 import java.lang.Math.random
 import javax.annotation.PostConstruct
+import javax.annotation.PreDestroy
 
 @Component
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 class MusicPlayer {
 
     @Autowired
@@ -23,20 +28,24 @@ class MusicPlayer {
     private lateinit var metalMusic: Music
 
     private lateinit var music: Map<MusicGenre, Music>
-    private var name: String? = null
-    private var volume: Int? = null
+
+    @Value("\${musicPlayer.name}")
+    private lateinit var name: String
+
+    @Value("\${musicPlayer.volume}")
+    private var volume: Int = 0
 
     fun setName(name: String) {
         this.name = name
     }
 
-    fun getName() = name ?: "null"
+    fun getName() = name
 
     fun setVolume(volume: Int) {
         this.volume = volume
     }
 
-    fun getVolume() = volume ?: 0
+    fun getVolume() = volume
 
     fun playMusic(genre: MusicGenre) {
         println("Player name: ${this.getName()}")
@@ -53,5 +62,9 @@ class MusicPlayer {
             MusicGenre.ROCK to rockMusic,
             MusicGenre.METAL to metalMusic
         )
+    }
+
+    fun turnOff() {
+        println("${getName()} turned off")
     }
 }
