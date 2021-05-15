@@ -17,7 +17,8 @@
           class="com.hex.springcourse.MetalMusic"/>
 
     <bean id="musicPlayerBean"
-          class="com.hex.springcourse.MusicPlayer">
+            class="com.hex.springcourse.MusicPlayer"
+            scope="prototype">
         <property name="musicList">
             <list>
                 <ref bean="classicalMusicBean"/>
