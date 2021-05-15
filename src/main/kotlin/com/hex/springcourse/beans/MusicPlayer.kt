@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
 import java.lang.Math.random
 import javax.annotation.PostConstruct
-import javax.annotation.PreDestroy
 
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
@@ -35,24 +34,26 @@ class MusicPlayer {
     @Value("\${musicPlayer.volume}")
     private var volume: Int = 0
 
-    fun setName(name: String) {
-        this.name = name
-    }
-
     fun getName() = name
-
-    fun setVolume(volume: Int) {
-        this.volume = volume
-    }
 
     fun getVolume() = volume
 
-    fun playMusic(genre: MusicGenre) {
+    fun playMusic(genre: MusicGenre = randomGenre()) {
         println("Player name: ${this.getName()}")
         println("Volume is ${this.getVolume()}")
+        println("Genre: ${genre.name.toCamelCase()} music")
         (random() * (music[genre]?.getSongs()?.size ?: 0)).toInt().let { index ->
             println("Playing: ${music[genre]?.getSongs()?.get(index)}")
         }
+    }
+
+    fun turnOff() {
+        println("${getName()} turned off")
+    }
+
+    private fun randomGenre(): MusicGenre {
+        val genres = music.keys.toList()
+        return genres[(random() * genres.size).toInt()]
     }
 
     @PostConstruct
@@ -64,7 +65,9 @@ class MusicPlayer {
         )
     }
 
-    fun turnOff() {
-        println("${getName()} turned off")
+    private fun String.toCamelCase(): String {
+        return this.toCharArray().mapIndexed { i, c ->
+            if (i == 0) c.toUpperCase() else c.toLowerCase()
+        }.joinToString(separator = "")
     }
 }
