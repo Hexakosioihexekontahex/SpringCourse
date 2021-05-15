@@ -1,28 +1,21 @@
 package com.hex.springcourse
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import javax.annotation.PostConstruct
 
 @Component
-class MusicPlayer() {
-    private var musicList: List<Music>? = null
+class MusicPlayer {
+    @Autowired
+    private lateinit var classicalMusic: ClassicalMusic
+    @Autowired
+    private lateinit var rockMusic: RockMusic
+    @Autowired
+    private lateinit var metalMusic: MetalMusic
+
+    private lateinit var musicList: List<Music>
     private var name: String? = null
     private var volume: Int? = null
-
-    constructor(musicList: List<Music>) : this() {
-        this.musicList = musicList
-    }
-
-    fun init() {
-        println("Doing MusicPlayer initialization")
-    }
-
-    fun destroy() {
-        println("Doing MusicPlayer destruction")
-    }
-
-    fun setMusicList(musicList: List<Music>) {
-        this.musicList = musicList
-    }
 
     fun setName(name: String) {
         this.name = name
@@ -39,8 +32,13 @@ class MusicPlayer() {
     fun playMusic() {
         println("Player name: ${this.getName()}")
         println("Volume is ${this.getVolume()}")
-        musicList?.forEach { music ->
+        musicList.forEach { music ->
             println("Playing: ${music.getSongTitle()}")
         }
+    }
+
+    @PostConstruct
+    private fun createMusicList() {
+        musicList = listOf(classicalMusic, rockMusic, metalMusic)
     }
 }

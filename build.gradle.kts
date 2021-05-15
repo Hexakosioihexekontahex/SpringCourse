@@ -24,6 +24,7 @@ dependencies {
 
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("javax.annotation:javax.annotation-api")
 
 //	implementation("org.springframework.boot:spring-boot-starter-web")
 //	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
