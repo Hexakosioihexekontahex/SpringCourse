@@ -1,5 +1,8 @@
 package com.hex.springcourse
 
+import org.springframework.stereotype.Component
+
+@Component
 class MusicPlayer() {
     private var musicList: List<Music>? = null
     private var name: String? = null
@@ -34,6 +37,8 @@ class MusicPlayer() {
     fun getVolume() = volume ?: 0
 
     fun playMusic() {
+        println("Player name: ${this.getName()}")
+        println("Volume is ${this.getVolume()}")
         musicList?.forEach { music ->
             println("Playing: ${music.getSongTitle()}")
         }
