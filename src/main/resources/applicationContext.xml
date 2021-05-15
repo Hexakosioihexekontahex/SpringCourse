@@ -17,8 +17,10 @@
           class="com.hex.springcourse.MetalMusic"/>
 
     <bean id="musicPlayerBean"
-            class="com.hex.springcourse.MusicPlayer"
-            scope="prototype">
+          class="com.hex.springcourse.MusicPlayer"
+          init-method="init"
+          destroy-method="destroy"
+    >
         <property name="musicList">
             <list>
                 <ref bean="classicalMusicBean"/>

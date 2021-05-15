@@ -9,6 +9,14 @@ class MusicPlayer() {
         this.musicList = musicList
     }
 
+    fun init() {
+        println("Doing MusicPlayer initialization")
+    }
+
+    fun destroy() {
+        println("Doing MusicPlayer destruction")
+    }
+
     fun setMusicList(musicList: List<Music>) {
         this.musicList = musicList
     }
